@@ -1,16 +1,10 @@
 package ch.hearc.cours_04_advanced.chat.main.security;
 
-import ch.hearc.cours_04_advanced.chat.rmi.ChatRMI;
-import ch.hearc.cours_04_advanced.rmi.pcsecret.Secret;
-
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
-import java.beans.JavaBean;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 import java.security.*;
 
 public class Security implements Security_I {

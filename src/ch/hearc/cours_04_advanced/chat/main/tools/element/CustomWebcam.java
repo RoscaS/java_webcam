@@ -16,6 +16,11 @@ public class CustomWebcam {
 
     public CustomWebcam() {
         webcam = Webcam.getDefault();
+        System.out.println("\n\n");
+        for (Webcam webcam : Webcam.getWebcams())
+            {
+                System.out.println(webcam.getName());
+            }
         webcam.setViewSize(WebcamResolution.VGA.getSize());
     }
 
