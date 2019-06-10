@@ -3,10 +3,13 @@ package ch.hearc.cours_04_advanced.chat.main.tools.element;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamResolution;
 
+import java.awt.*;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.awt.image.RescaleOp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomWebcam {
 
@@ -15,7 +18,12 @@ public class CustomWebcam {
 	\*------------------------------------------------------------------*/
 
     public CustomWebcam() {
-        webcam = Webcam.getDefault();
+        try {
+            webcam = Webcam.getDefault();
+        }
+        catch(Exception e){
+
+        }
         System.out.println("\n\n");
         for (Webcam webcam : Webcam.getWebcams())
             {
@@ -49,9 +57,19 @@ public class CustomWebcam {
         return webcam;
     }
 
+    public List<Webcam> getWebcams()
+    {
+        return Webcam.getWebcams();
+    }
+
 	/*------------------------------*\
 	|*				Setters		   *|
 	\*------------------------------*/
+
+	public void setWebcam(int i)
+    {
+        webcam = Webcam.getWebcams().get(i);
+    }
 
 	/*------------------------------------------------------------------*\
 	|*							Private Methods 				      *|

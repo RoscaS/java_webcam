@@ -1,9 +1,12 @@
 package ch.hearc.cours_04_advanced.chat.main.tools.element;
 
+import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class JPanelWebcam extends JPanel {
 
@@ -21,21 +24,52 @@ public class JPanelWebcam extends JPanel {
     private void geometry() {
         setLayout(new BorderLayout());
 
+        webcamComboBox = new JComboBox();
+
         webcam = new CustomWebcam();
+
+        for(Webcam webcam : webcam.getWebcams())
+        {
+            webcamComboBox.addItem(webcam);
+        }
+
         webcam.setGrey(1.5f, 1f);
-        webcamPanel = new WebcamPanel(webcam.getWebcam());
-        add(webcamPanel, BorderLayout.CENTER);
+
+        try {
+            webcamPanel = new WebcamPanel(webcam.getWebcam());
+            add(webcamPanel, BorderLayout.CENTER);
+        }
+        catch(Exception e)
+        {
+
+        }
+
+        add(webcamComboBox, BorderLayout.NORTH);
     }
 
     private void control() {
         //rien
+        webcamComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                webcam.setWebcam(webcamComboBox.getSelectedIndex());
+                webcamPanel = new WebcamPanel(webcam.getWebcam());
+                add(webcamPanel, BorderLayout.CENTER);
+            }
+        });
     }
 
     private void apparence() {
-        webcamPanel.setFPSDisplayed(true);
-        // webcamPanel.setDisplayDebugInfo(true);
-        webcamPanel.setImageSizeDisplayed(true);
-        webcamPanel.setMirrored(true);
+        try {
+            webcamPanel.setFPSDisplayed(true);
+            // webcamPanel.setDisplayDebugInfo(true);
+            webcamPanel.setImageSizeDisplayed(true);
+            webcamPanel.setMirrored(true);
+        }
+        catch(Exception e)
+        {
+
+        }
     }
 
     /*------------------------------------------------------------------*\
@@ -49,5 +83,6 @@ public class JPanelWebcam extends JPanel {
    	\*------------------------------------------------------------------*/
 
     private WebcamPanel webcamPanel;
+    private JComboBox webcamComboBox;
     private CustomWebcam webcam;
 }
