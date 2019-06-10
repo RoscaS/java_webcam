@@ -5,10 +5,8 @@ import java.awt.image.BufferedImage;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.security.PublicKey;
-import java.util.concurrent.Exchanger;
 
 import ch.hearc.cours_04_advanced.chat.main.Application;
 import ch.hearc.cours_04_advanced.chat.main.security.Message;
