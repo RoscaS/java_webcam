@@ -1,5 +1,8 @@
 package ch.hearc.cours_04_advanced.chat.main.tools.element;
 
+
+import ch.hearc.cours_04_advanced.chat.main.Application;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -44,12 +47,15 @@ public class JPanelChatWriter extends JPanel {
     }
 
     private void control() {
+
         jtfMessage.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                jtfMessage.setText("");
-            }
-        });
+                            @Override
+                            public void actionPerformed(ActionEvent actionEvent) {
+                                lblChat.setText(lblChat.getText() + "\n" + jtfMessage.getText());
+                                Application.getInstance().sendText(jtfMessage.getText());
+                                jtfMessage.setText("");
+                            }
+                        });
 
 
         jtfMessage.addFocusListener(new FocusAdapter() {

@@ -1,12 +1,14 @@
 package ch.hearc.cours_04_advanced.chat.main.tools;
 
 
+import ch.hearc.cours_04_advanced.chat.main.Application;
 import ch.hearc.cours_04_advanced.chat.main.JChat_A;
 import ch.hearc.cours_04_advanced.chat.main.tools.element.JPanelChatWriter;
 import ch.hearc.cours_04_advanced.chat.main.tools.element.JPanelWebcam;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
 public class JPanelChat extends JChat_A {

@@ -119,7 +119,7 @@ public class ChatRMI implements ChatRemote_I
 		this.foreignPublicKey = foreignPublicKey;
 		Message.setForeignPublicKey(foreignPublicKey);
 
-		if(publicKeySent)
+		if(!publicKeySent)
 		{
 			sendForeignKey();
 		}
