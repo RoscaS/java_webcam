@@ -4,6 +4,7 @@ import com.github.sarxos.webcam.WebcamPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.ExecutionException;
 
 public class JPanelWebcam extends JPanel {
 
@@ -20,11 +21,14 @@ public class JPanelWebcam extends JPanel {
 
     private void geometry() {
         setLayout(new BorderLayout());
-
+        try{
         webcam = new CustomWebcam();
         webcam.setGrey(1.5f, 1f);
+
         webcamPanel = new WebcamPanel(webcam.getWebcam());
         add(webcamPanel, BorderLayout.CENTER);
+        }catch (Exception e) {}
+
     }
 
     private void control() {
@@ -32,10 +36,13 @@ public class JPanelWebcam extends JPanel {
     }
 
     private void apparence() {
-        webcamPanel.setFPSDisplayed(true);
-        // webcamPanel.setDisplayDebugInfo(true);
-        webcamPanel.setImageSizeDisplayed(true);
-        webcamPanel.setMirrored(true);
+        try {
+            webcamPanel.setFPSDisplayed(true);
+            // webcamPanel.setDisplayDebugInfo(true);
+            webcamPanel.setImageSizeDisplayed(true);
+            webcamPanel.setMirrored(true);
+        } catch (Exception e) {}
+
     }
 
     /*------------------------------------------------------------------*\

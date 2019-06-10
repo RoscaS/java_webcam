@@ -15,7 +15,10 @@ public class CustomWebcam {
 	\*------------------------------------------------------------------*/
 
     public CustomWebcam() {
-        webcam = Webcam.getDefault();
+        try {
+            webcam = Webcam.getDefault();
+        } catch (Exception e){}
+
         System.out.println("\n\n");
         for (Webcam webcam : Webcam.getWebcams())
             {
