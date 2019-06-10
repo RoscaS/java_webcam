@@ -29,6 +29,7 @@ www-test/
 *.ipr
 *.iws
 /android/out/
+/out/*
 com_crashlytics_export_strings.xml
 
 ## Eclipse

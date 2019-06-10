@@ -12,5 +12,7 @@ public interface Security_I
 
 	public void init(PublicKey publicKey);
 
+	public PublicKey getPublicKey();
+
 	}
 
