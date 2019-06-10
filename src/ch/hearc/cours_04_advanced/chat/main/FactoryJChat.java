@@ -2,6 +2,7 @@
 package ch.hearc.cours_04_advanced.chat.main;
 
 import ch.hearc.cours_04_advanced.chat.main.tools.JChatTemp;
+import ch.hearc.cours_04_advanced.chat.main.tools.JPanelChat;
 
 public class FactoryJChat
 	{
@@ -12,7 +13,7 @@ public class FactoryJChat
 
 	public static JChat_A create()
 	{
-		return new JChatTemp(); //FIXME a remplacer par la classe de l'equipe gui
+		return new JPanelChat(); //FIXME a remplacer par la classe de l'equipe gui
 	}
 
 	/*------------------------------------------------------------------*\
