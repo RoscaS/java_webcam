@@ -14,7 +14,7 @@ public class CustomWebcam {
 	|*							Constructors						  *|
 	\*------------------------------------------------------------------*/
 
-    public CustomWebcam() {//TODO test NULL
+    public CustomWebcam() {
         webcam = Webcam.getDefault();
         webcam.setViewSize(WebcamResolution.VGA.getSize());
     }

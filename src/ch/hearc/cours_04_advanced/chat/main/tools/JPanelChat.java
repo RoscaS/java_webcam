@@ -4,6 +4,8 @@ package ch.hearc.cours_04_advanced.chat.main.tools;
 import ch.hearc.cours_04_advanced.chat.main.JChat_A;
 import ch.hearc.cours_04_advanced.chat.main.tools.element.JPanelChatWriter;
 import ch.hearc.cours_04_advanced.chat.main.tools.element.JPanelWebcam;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -22,11 +24,11 @@ public class JPanelChat extends JChat_A {
     private void geometry() {
         jPanelChatWriter = new JPanelChatWriter();
         jPanelWebcam = new JPanelWebcam();
+        splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, jPanelWebcam, jPanelChatWriter);
 
         setLayout(new BorderLayout());
 
-        add(jPanelChatWriter, BorderLayout.CENTER);
-        add(jPanelWebcam, BorderLayout.WEST);
+        add(splitPane, BorderLayout.CENTER);
     }
 
     private void control() {
@@ -34,7 +36,7 @@ public class JPanelChat extends JChat_A {
     }
 
     private void apparence() {
-
+        splitPane.setDividerSize(3);
     }
 
     /*------------------------------------------------------------------*\
@@ -80,6 +82,7 @@ public class JPanelChat extends JChat_A {
 
     private JPanelWebcam jPanelWebcam;
     private JPanelChatWriter jPanelChatWriter;
+    JSplitPane splitPane;
 
 
 }

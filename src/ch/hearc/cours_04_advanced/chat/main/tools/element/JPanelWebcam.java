@@ -33,7 +33,7 @@ public class JPanelWebcam extends JPanel {
 
     private void apparence() {
         webcamPanel.setFPSDisplayed(true);
-        webcamPanel.setDisplayDebugInfo(true);
+        // webcamPanel.setDisplayDebugInfo(true);
         webcamPanel.setImageSizeDisplayed(true);
         webcamPanel.setMirrored(true);
     }
