@@ -5,11 +5,13 @@ import java.awt.image.BufferedImage;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.security.PublicKey;
+import java.util.concurrent.Exchanger;
 
 import ch.hearc.cours_04_advanced.chat.main.Application;
-import ch.hearc.cours_04_advanced.rmi.pcsecret.Message;
-
+import ch.hearc.cours_04_advanced.chat.main.security.Message;
 import com.bilat.tools.reseau.rmi.RmiTools;
 import com.bilat.tools.reseau.rmi.RmiURL;
 
@@ -54,7 +56,14 @@ public class ChatRMI implements ChatRemote_I
 		{
 		try
 			{
-			chatRemote.setText(new Message(text));
+			Message message = new Message(text);
+
+			if(Message.getPublicKey() == null)
+			{
+				sendForeignKey();
+			}
+
+			chatRemote.setText(message);
 			}
 		catch (RemoteException e)
 			{
@@ -63,7 +72,7 @@ public class ChatRMI implements ChatRemote_I
 			}
 		}
 
-	/**
+		/**
 	 * Appelle a distance la methode et change le gui
 	 */
 	public void sendImage(BufferedImage bImage)
@@ -105,6 +114,18 @@ public class ChatRMI implements ChatRemote_I
 		{
 		Application.getInstance().setRemotePseudo(pseudo);
 		}
+
+	@Override
+	public void initForeignKey(PublicKey foreignPublicKey) throws RemoteException
+	{
+		this.foreignPublicKey = foreignPublicKey;
+		Message.setForeignPublicKey(foreignPublicKey);
+
+		if(publicKeySent)
+		{
+			sendForeignKey();
+		}
+	}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
@@ -152,6 +173,17 @@ public class ChatRMI implements ChatRemote_I
 			}
 		}
 
+	private void sendForeignKey() {
+		try{
+			chatRemote.initForeignKey(Message.getPublicKey());
+		}
+		catch(RemoteException e)
+		{
+		Application.getInstance().showError("[ChatRMI] : exchangePublicKey");
+		e.printStackTrace();
+		}
+	}
+
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
@@ -160,6 +192,10 @@ public class ChatRMI implements ChatRemote_I
 
 	// Tools
 	private ChatRemote_I chatRemote;
+	private PublicKey foreignPublicKey;
+	private PublicKey publicKey;
+
+	private boolean publicKeySent = false;
 
 	/*------------------------------*\
 	|*			  Static			*|

@@ -14,7 +14,7 @@ public class FactorySecurity
 
 	public static Security_I create()
 		{
-		return new SecurityTemp(); // FIXME a changer par la vraie classe
+		return new Security();
 		}
 
 	/*------------------------------------------------------------------*\

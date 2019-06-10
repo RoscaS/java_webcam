@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.security.PublicKey;
 
 public class Message implements Serializable
 	{
@@ -32,6 +33,11 @@ public class Message implements Serializable
 		return builder.toString();
 		}
 
+	public static void setForeignPublicKey(PublicKey foreignPublicKey)
+	{
+		SECURITY.init(foreignPublicKey);
+	}
+
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
@@ -40,6 +46,11 @@ public class Message implements Serializable
 		{
 		return this.secret;
 		}
+
+	public static PublicKey getPublicKey()
+	{
+		return SECURITY.getPublicKey();
+	}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
