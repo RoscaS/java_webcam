@@ -7,7 +7,8 @@ import java.util.TimerTask;
 import ch.hearc.cours_04_advanced.chat.main.Application;
 
 /**
- * singleton
+ * Singleton
+ *
  */
 public class Animator
 	{
