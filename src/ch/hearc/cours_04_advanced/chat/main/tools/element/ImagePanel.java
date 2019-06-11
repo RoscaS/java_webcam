@@ -19,7 +19,7 @@ public ImagePanel() {
                         480,
                         BufferedImage.TYPE_BYTE_BINARY);
 
-    this.setMinimumSize(new Dimension(640,480));
+    this.setMinimumSize(new Dimension(640/10,480/10));
     this.setPreferredSize(new Dimension(640,480));
 }
 

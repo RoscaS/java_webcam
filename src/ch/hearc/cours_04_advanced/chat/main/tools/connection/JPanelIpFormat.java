@@ -1,6 +1,5 @@
 package ch.hearc.cours_04_advanced.chat.main.tools.connection;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.apache.commons.validator.routines.InetAddressValidator;
 
 import javax.swing.*;

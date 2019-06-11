@@ -44,7 +44,7 @@ public class JPanelWebcam extends JChat_A {
 
         img = new ImagePanel();
 
-        add(img, BorderLayout.NORTH);
+        add(img, BorderLayout.WEST);
         add(webcamComboBox, BorderLayout.SOUTH);
     }
 
@@ -122,7 +122,7 @@ public class JPanelWebcam extends JChat_A {
         setGrey(1.5f, 0.8f);
         webcamPanel = new WebcamPanel(webcam);
         setWebcamPanel();
-        add(webcamPanel, BorderLayout.CENTER);
+        add(webcamPanel, BorderLayout.EAST);
     }
     /*------------------------------------------------------------------*\
    	|*							Private Attributs 						*|

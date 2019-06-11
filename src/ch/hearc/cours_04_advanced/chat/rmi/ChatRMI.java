@@ -78,6 +78,8 @@ public class ChatRMI implements ChatRemote_I
 			{
 			Application.getInstance().showError("[ChatRMI] : sendImage");
 			e.printStackTrace();
+			chatRemote = null;
+			Application.getInstance().connect();
 			}
 		}
 
