@@ -87,7 +87,7 @@ public class JPanelChat extends JChat_A {
     private JPanelChatWriter jPanelChatWriter;
 
     private String remotePseudo, localPseudo;
-    JSplitPane splitPane;
+    private JSplitPane splitPane;
 
 
 }

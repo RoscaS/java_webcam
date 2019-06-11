@@ -32,7 +32,6 @@ public class JPanelWebcam extends JChat_A {
         addComboBoxWebcam();
 
         int idWebcam = getValideWebcamId();
-        System.out.println(idWebcam);
         if (idWebcam != -1) {
             showWebcam(idWebcam);
         }

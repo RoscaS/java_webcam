@@ -5,21 +5,19 @@ import java.awt.BorderLayout;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-public class JFramePanelContainer extends JFrame
-	{
+public class JFramePanelContainer extends JFrame {
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JFramePanelContainer(JComponent jComponent)
-		{
-		this.jComponent = jComponent;
+    public JFramePanelContainer(JComponent jComponent) {
+        this.jComponent = jComponent;
 
-		geometry();
-		control();
-		appearance();
-		}
+        geometry();
+        control();
+        appearance();
+    }
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
@@ -33,36 +31,33 @@ public class JFramePanelContainer extends JFrame
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
-	private void geometry()
-		{
-		BorderLayout borderLayout = new BorderLayout();
-		setLayout(borderLayout);
+    private void geometry() {
+        BorderLayout borderLayout = new BorderLayout();
+        setLayout(borderLayout);
 
-		add(jComponent,BorderLayout.CENTER);
+        add(jComponent, BorderLayout.CENTER);
 
-		}
+    }
 
-	private void control()
-		{
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		}
+    private void control() {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
 
-	private void appearance()
-		{
-		setMinimumSize(jComponent.getMinimumSize());
-		setSize(getMinimumSize());
-		setLocationRelativeTo(null); // frame centrer
-		setVisible(true); // last!
-		}
+    private void appearance() {
+        setMinimumSize(jComponent.getMinimumSize());
+        setSize(getMinimumSize());
+        setLocationRelativeTo(null); // frame centrer
+        setVisible(true); // last!
+    }
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
-	// Inputs
-	private JComponent jComponent;
+    // Inputs
+    private JComponent jComponent;
 
-	// Tools
+    // Tools
 
 
-	}
+}
