@@ -52,7 +52,7 @@ public class JPanelMain extends JChat_A {
 
     private void apparence() {
         setBackground(new Color(84, 87, 94));
-        setMinimumSize(new Dimension(jPanelConnection.getMinimumSize()));
+        setMinimumSize(new Dimension(jPanelConnection.getMinimumSize().width, jPanelConnection.getMinimumSize().height + 50));
     }
 
     /*------------------------------------------------------------------*\
@@ -73,7 +73,7 @@ public class JPanelMain extends JChat_A {
 
     @Override
     public void setText(String text) {
-
+        jPanelChat.setText(text);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class JPanelMain extends JChat_A {
 
     @Override
     public void setLocalImage(BufferedImage bLocalImage) {
-
+        jPanelChat.setLocalImage(bLocalImage);
     }
 
     @Override
@@ -93,11 +93,11 @@ public class JPanelMain extends JChat_A {
 
     @Override
     public void setLocalPseudo(String localPseudo) {
-
+        jPanelChat.setLocalPseudo(localPseudo);
     }
 
     @Override
     public void showError(String error) {
-
+        jPanelChat.showError(error);
     }
 }
