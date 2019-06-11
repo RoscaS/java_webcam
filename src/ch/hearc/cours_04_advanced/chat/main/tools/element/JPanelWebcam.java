@@ -9,6 +9,7 @@ import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
@@ -41,6 +42,9 @@ public class JPanelWebcam extends JChat_A {
             showWebcam(idWebcam);
         }
 
+        img = new ImagePanel();
+
+        add(img, BorderLayout.NORTH);
         add(webcamComboBox, BorderLayout.SOUTH);
     }
 
@@ -130,6 +134,8 @@ public class JPanelWebcam extends JChat_A {
     private Webcam webcam;
     private BufferedImage webcamOther;
 
+    private ImagePanel img;
+
     @Override
     public void setText(String text) {
 
@@ -137,7 +143,7 @@ public class JPanelWebcam extends JChat_A {
 
     @Override
     public void setRemoteImage(BufferedImage bRemoteImage) {
-
+        img.setImage(bRemoteImage);
     }
 
     @Override
