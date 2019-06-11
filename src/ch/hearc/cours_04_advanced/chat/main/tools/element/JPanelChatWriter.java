@@ -1,14 +1,13 @@
 package ch.hearc.cours_04_advanced.chat.main.tools.element;
 
+
 import ch.hearc.cours_04_advanced.chat.main.Application;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 public class JPanelChatWriter extends JPanel {
 

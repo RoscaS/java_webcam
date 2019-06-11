@@ -23,26 +23,21 @@ public class JPanelWebcam extends JPanel {
 
     private void geometry() {
         setLayout(new BorderLayout());
+        webcamComboBox = new JComboBox<>();
 
-        webcamComboBox = new JComboBox();
+        for (Webcam webcam : Webcam.getWebcams())
+            {
+                webcamComboBox.addItem(webcam);
+            }
 
+        try{
         webcam = new CustomWebcam();
-
-        for(Webcam webcam : webcam.getWebcams())
-        {
-            webcamComboBox.addItem(webcam);
-        }
-
         webcam.setGrey(1.5f, 1f);
 
-        try {
-            webcamPanel = new WebcamPanel(webcam.getWebcam());
-            add(webcamPanel, BorderLayout.CENTER);
-        }
-        catch(Exception e)
-        {
+        webcamPanel = new WebcamPanel(webcam.getWebcam());
+        add(webcamPanel, BorderLayout.CENTER);
 
-        }
+        } catch (Exception ignored) {}
 
         add(webcamComboBox, BorderLayout.NORTH);
     }
@@ -65,11 +60,7 @@ public class JPanelWebcam extends JPanel {
             // webcamPanel.setDisplayDebugInfo(true);
             webcamPanel.setImageSizeDisplayed(true);
             webcamPanel.setMirrored(true);
-        }
-        catch(Exception e)
-        {
-
-        }
+        } catch (Exception ignored) {}
     }
 
     /*------------------------------------------------------------------*\
@@ -83,6 +74,6 @@ public class JPanelWebcam extends JPanel {
    	\*------------------------------------------------------------------*/
 
     private WebcamPanel webcamPanel;
-    private JComboBox webcamComboBox;
+    private JComboBox<Webcam> webcamComboBox;
     private CustomWebcam webcam;
 }

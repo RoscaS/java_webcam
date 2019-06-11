@@ -20,10 +20,8 @@ public class CustomWebcam {
     public CustomWebcam() {
         try {
             webcam = Webcam.getDefault();
-        }
-        catch(Exception e){
+        } catch (Exception e){}
 
-        }
         System.out.println("\n\n");
         for (Webcam webcam : Webcam.getWebcams())
             {
