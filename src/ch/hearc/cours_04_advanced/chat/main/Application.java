@@ -13,7 +13,7 @@ import javax.swing.*;
 /**
  * singleton
  */
-public class Application implements JChat_I {
+public class Application implements JChat_I, Runnable {
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
@@ -40,6 +40,11 @@ public class Application implements JChat_I {
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	@Override
+	public void run() {
+		 ChatRMI.getInstance();
+	}
+
     public void connect() {
 
     	if(System.getProperty("ID_SHARE") == null)
@@ -48,7 +53,8 @@ public class Application implements JChat_I {
 			System.setProperty("ID_CONNECT", "1");
 		}
 
-        ChatRMI chatRMI = ChatRMI.getInstance();
+    	Thread thread = new Thread(this);
+    	thread.start();
     }
 
     public void sendText(String text) {
@@ -111,5 +117,4 @@ public class Application implements JChat_I {
 	\*------------------------------*/
 
     private static Application instance = null;
-
 }
