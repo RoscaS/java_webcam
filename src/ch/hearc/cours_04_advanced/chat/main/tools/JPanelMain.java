@@ -5,6 +5,7 @@ import ch.hearc.cours_04_advanced.chat.main.tools.connection.JPanelConnection;
 import ch.hearc.cours_04_advanced.chat.main.tools.element.JPanelChat;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -34,7 +35,7 @@ public class JPanelMain extends JChat_A {
         vBox.add(Box.createVerticalGlue());
         vBox.add(hBox);
         vBox.add(Box.createVerticalGlue());
-        add(vBox, BorderLayout.CENTER);
+        add(vBox);
     }
 
     private void control() {
