@@ -1,10 +1,14 @@
 
 package ch.hearc.cours_04_advanced.chat.main;
 
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 import ch.hearc.cours_04_advanced.chat.main.tools.JFramePanelContainer;
+import ch.hearc.cours_04_advanced.chat.main.tools.connection.JPanelConnection;
 import ch.hearc.cours_04_advanced.chat.rmi.ChatRMI;
+
+import javax.swing.*;
 
 /**
  * singleton
@@ -19,7 +23,8 @@ public class Application implements JChat_I
 	private Application()
 		{
 		jChat = FactoryJChat.create();
-		jFramePanelContainer = new JFramePanelContainer(jChat);
+		jPanelConnection = new JPanelConnection();
+		jFramePanelContainer = new JFramePanelContainer(jPanelConnection);
 		}
 
 	/*------------------------------*\
@@ -39,6 +44,13 @@ public class Application implements JChat_I
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	public void connect()
+	{
+		jFramePanelContainer.setVisible(false);
+		jFramePanelContainer = new JFramePanelContainer(jChat);
+		ChatRMI chatRMI = ChatRMI.getInstance();
+	}
 
 	public void sendText(String text)
 		{
@@ -104,6 +116,7 @@ public class Application implements JChat_I
 
 	private JChat_A jChat;
 	private JFramePanelContainer jFramePanelContainer;
+	private JPanelConnection jPanelConnection;
 
 	/*------------------------------*\
 	|*			  Static			*|

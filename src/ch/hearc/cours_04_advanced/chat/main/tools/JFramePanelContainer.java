@@ -39,6 +39,7 @@ public class JFramePanelContainer extends JFrame
 		setLayout(borderLayout);
 
 		add(jComponent,BorderLayout.CENTER);
+
 		}
 
 	private void control()

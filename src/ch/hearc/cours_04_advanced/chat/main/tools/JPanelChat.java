@@ -65,12 +65,13 @@ public class JPanelChat extends JChat_A {
 
     @Override
     public void setRemotePseudo(String remotePseudo) {
-
+        this.remotePseudo = remotePseudo;
     }
 
     @Override
     public void setLocalPseudo(String localPseudo) {
-
+        this.localPseudo = localPseudo;
+        jPanelChatWriter.setLocalPseudo(this.localPseudo);
     }
 
     @Override
@@ -84,6 +85,8 @@ public class JPanelChat extends JChat_A {
 
     private JPanelWebcam jPanelWebcam;
     private JPanelChatWriter jPanelChatWriter;
+
+    private String remotePseudo, localPseudo;
     JSplitPane splitPane;
 
 
