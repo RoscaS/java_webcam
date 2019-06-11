@@ -15,7 +15,7 @@ public class FactoryJChat
 
 	public static JChat_A create()
 	{
-		return new JPanelChat();
+		return new JPanelConnection();
 	}
 
 	/*------------------------------------------------------------------*\

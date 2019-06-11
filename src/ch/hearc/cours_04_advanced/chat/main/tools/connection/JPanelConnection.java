@@ -4,8 +4,10 @@ import ch.hearc.cours_04_advanced.chat.main.Application;
 import ch.hearc.cours_04_advanced.chat.main.JChat_A;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.plaf.ButtonUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,6 +52,7 @@ public class JPanelConnection extends JChat_A {
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.insets = new Insets(5, 5, 5, 5);
         add(lblIpServer, constraints);
         constraints.gridy = 1;
         add(lblPseudo, constraints);
@@ -81,17 +84,38 @@ public class JPanelConnection extends JChat_A {
 
     private void apparence() {
         //this.getRootPane().setDefaultButton(btnConnection);
-        Color backgroundColor = new Color(184, 187, 194);
+        Color backgroundColor = new Color(50,50,50);
         this.setBackground(backgroundColor);
-        this.setPreferredSize(new Dimension(430, 200));
-        this.setMinimumSize(new Dimension(430, 200));
+        this.setPreferredSize(new Dimension(430, 150));
+        this.setMinimumSize(new Dimension(430, 150));
 
         txfIp.setBackground(backgroundColor);
+
+        Color backgroundTextField = new Color(25,25,25);
+        txfIp.setBackgroundColor(backgroundTextField);
+        txfPseudo.setBackground(backgroundTextField);
+
+        Color textFieldFontColor = new Color(200,200,200);
+        txfPseudo.setForeground(textFieldFontColor);
+        txfIp.setForegroundColor(textFieldFontColor);
+
+        txfPseudo.setBorder(BorderFactory.createLineBorder(backgroundTextField, 2, true));
+        txfIp.setBorderTextField(BorderFactory.createLineBorder(backgroundTextField, 2, true));
+
         btnConnection.setEnabled(false);
+        btnConnection.setForeground(Color.white);
+        btnConnection.setBackground(new Color(100, 100, 200));
+        btnConnection.setPreferredSize(new Dimension(175, 25));
+        Border borderButton = BorderFactory.createLineBorder(new Color(100, 100, 200));
+        btnConnection.setBorder(borderButton);
 
-        txfPseudo.setMinimumSize(new Dimension(200,30));
-        txfPseudo.setPreferredSize(new Dimension(200,20));
+        txfPseudo.setMinimumSize(new Dimension(175,30));
+        txfPseudo.setPreferredSize(new Dimension(175,20));
 
+        Color colorFont = Color.WHITE;
+        lblIpServer.setForeground(colorFont);
+        lblIpClient.setForeground(colorFont);
+        lblPseudo.setForeground(colorFont);
     }
 
     /*------------------------------------------------------------------*\

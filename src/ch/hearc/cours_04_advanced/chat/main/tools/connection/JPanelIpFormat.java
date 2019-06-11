@@ -3,6 +3,7 @@ package ch.hearc.cours_04_advanced.chat.main.tools.connection;
 import org.apache.commons.validator.routines.InetAddressValidator;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
@@ -42,7 +43,7 @@ public class JPanelIpFormat extends JPanel {
 
     private void apparence() {
         Dimension dimension = new Dimension();
-        dimension.setSize(200,30);
+        dimension.setSize(200,textFieldsIp.get(0).getHeight());
         this.setMinimumSize(dimension);
         /*
         this.setPreferredSize(dimension);
@@ -66,6 +67,31 @@ public class JPanelIpFormat extends JPanel {
         InetAddressValidator validator = InetAddressValidator.getInstance();
         return validator.isValidInet4Address(getIp());
     }
+
+    public void setBackgroundColor(Color bgColor)
+    {
+        for(JTextField ipComponent : textFieldsIp)
+        {
+            ipComponent.setBackground(bgColor);
+        }
+    }
+
+    public void setForegroundColor(Color fgColor)
+    {
+        for(JTextField ipComponent : textFieldsIp)
+        {
+            ipComponent.setForeground(fgColor);
+        }
+    }
+
+    public void setBorderTextField(Border border)
+    {
+        for (JTextField ipComponent : textFieldsIp)
+        {
+            ipComponent.setBorder(border);
+        }
+    }
+
     /*------------------------------------------------------------------*\
    	|*							Private Methods							*|
    	\*------------------------------------------------------------------*/
