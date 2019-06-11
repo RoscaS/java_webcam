@@ -76,6 +76,7 @@ public class JPanelConnection extends JChat_A {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Application.getInstance().setLocalPseudo(txfPseudo.getText());
+                System.out.println(System.getProperty("ID_SHARE"));
                 System.setProperty("IP_ADDRESS", txfIp.getIp());
                 Application.getInstance().connect();
             }
