@@ -1,6 +1,9 @@
 package ch.hearc.cours_04_advanced.chat.main.tools.element;
 
+import ch.hearc.cours_04_advanced.chat.main.Application;
 import ch.hearc.cours_04_advanced.chat.main.JChat_A;
+import ch.hearc.cours_04_advanced.chat.main.video.WebcamException;
+import ch.hearc.cours_04_advanced.chat.main.video.WebcamService;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
@@ -13,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.awt.image.RescaleOp;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class JPanelWebcam extends JChat_A {
 
@@ -153,5 +158,22 @@ public class JPanelWebcam extends JChat_A {
     @Override
     public void showError(String error) {
 
+    }
+
+    @Override
+    public void startVideo()
+    {
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask()
+            {
+
+            @Override
+            public void run()
+                {
+                Application.getInstance().sendImage(webcam.getImage());
+            };
+        };
+
+        timer.schedule(timerTask, 0, 75);
     }
 }

@@ -79,6 +79,11 @@ public class JPanelChat extends JChat_A {
 
     }
 
+    @Override
+    public void startVideo() {
+        jPanelWebcam.startVideo();
+    }
+
     /*------------------------------------------------------------------*\
    	|*							Private Attributs 						*|
    	\*------------------------------------------------------------------*/

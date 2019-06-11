@@ -18,4 +18,6 @@ public interface JChat_I
 
 	public void showError(String error);
 
+	public void startVideo();
+
 	}
