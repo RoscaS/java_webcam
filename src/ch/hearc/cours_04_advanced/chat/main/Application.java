@@ -41,6 +41,13 @@ public class Application implements JChat_I {
 	\*------------------------------------------------------------------*/
 
     public void connect() {
+
+    	if(System.getProperty("ID_SHARE") == null)
+		{
+			System.setProperty("ID_SHARE", "1");
+			System.setProperty("ID_CONNECT", "1");
+		}
+
         ChatRMI chatRMI = ChatRMI.getInstance();
     }
 
