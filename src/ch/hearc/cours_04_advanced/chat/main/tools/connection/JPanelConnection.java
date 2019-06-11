@@ -86,8 +86,9 @@ public class JPanelConnection extends JChat_A {
         //this.getRootPane().setDefaultButton(btnConnection);
         Color backgroundColor = new Color(50,50,50);
         this.setBackground(backgroundColor);
-        this.setPreferredSize(new Dimension(430, 150));
-        this.setMinimumSize(new Dimension(430, 150));
+        this.setPreferredSize(new Dimension(500, 150));
+        this.setMinimumSize(new Dimension(500, 150));
+        this.setMaximumSize(new Dimension(500, 150));
 
         txfIp.setBackground(backgroundColor);
 
@@ -116,6 +117,8 @@ public class JPanelConnection extends JChat_A {
         lblIpServer.setForeground(colorFont);
         lblIpClient.setForeground(colorFont);
         lblPseudo.setForeground(colorFont);
+
+        txfIp.setIp("127.0.0.1");
     }
 
     /*------------------------------------------------------------------*\

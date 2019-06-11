@@ -1,5 +1,6 @@
 package ch.hearc.cours_04_advanced.chat.main.tools.connection;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.apache.commons.validator.routines.InetAddressValidator;
 
 import javax.swing.*;
@@ -23,14 +24,10 @@ public class JPanelIpFormat extends JPanel {
    	\*------------------------------------------------------------------*/
 
     private void geometry() {
-        String point = ".";
         textFieldsIp = new ArrayList<>(4);
         setLayout(new FlowLayout());
         for (int i = 0; i < 4; i++) {
             textFieldsIp.add(new JTextField(3));
-            if (i > 0) {
-                add(new JLabel(point));
-            }
             add(textFieldsIp.get(i));
         }
     }
@@ -45,9 +42,6 @@ public class JPanelIpFormat extends JPanel {
         Dimension dimension = new Dimension();
         dimension.setSize(200,textFieldsIp.get(0).getHeight());
         this.setMinimumSize(dimension);
-        /*
-        this.setPreferredSize(dimension);
-        this.setMaximumSize(dimension);*/
     }
 
     /*------------------------------------------------------------------*\
@@ -61,6 +55,15 @@ public class JPanelIpFormat extends JPanel {
         }
         sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
+    }
+
+    public void setIp(String ip){
+        System.out.println(ip);
+        String[] tableIp = ip.split("\\.");
+        for(int i = 0; i < tableIp.length; i++)
+        {
+            textFieldsIp.get(i).setText(tableIp[i]);
+        }
     }
 
     public Boolean isValide() {
