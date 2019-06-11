@@ -33,9 +33,9 @@ public class JPanelConnection extends JChat_A {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        setPreferredSize(new Dimension(140, 0));
 
-        gridLayout = new GridLayout(3, 3);
+        gridLayout = new GridBagLayout();
+
         lblIpServer = new JLabel("Adresse IP distante");
         lblPseudo = new JLabel("Votre pseudo");
         assert inetAddress != null;
@@ -46,12 +46,24 @@ public class JPanelConnection extends JChat_A {
 
         setLayout(gridLayout);
 
-        add(lblIpServer);
-        add(txfIp);
-        add(lblPseudo);
-        add(txfPseudo);
-        add(lblIpClient);
-        add(btnConnection);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        add(lblIpServer, constraints);
+        constraints.gridy = 1;
+        add(lblPseudo, constraints);
+        constraints.gridy = 2;
+        add(lblIpClient, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        constraints.fill = GridBagConstraints.NONE;
+        add(txfIp, constraints);
+        constraints.gridy = 1;
+        add(txfPseudo, constraints);
+        constraints.gridy = 2;
+        add(btnConnection, constraints);
     }
 
     private void control() {
@@ -69,8 +81,17 @@ public class JPanelConnection extends JChat_A {
 
     private void apparence() {
         //this.getRootPane().setDefaultButton(btnConnection);
-        this.setBackground(new Color(184, 187, 194));
+        Color backgroundColor = new Color(184, 187, 194);
+        this.setBackground(backgroundColor);
+        this.setPreferredSize(new Dimension(430, 200));
+        this.setMinimumSize(new Dimension(430, 200));
+
+        txfIp.setBackground(backgroundColor);
         btnConnection.setEnabled(false);
+
+        txfPseudo.setMinimumSize(new Dimension(200,30));
+        txfPseudo.setPreferredSize(new Dimension(200,20));
+
     }
 
     /*------------------------------------------------------------------*\
@@ -118,7 +139,7 @@ public class JPanelConnection extends JChat_A {
     private JPanelIpFormat txfIp;
     private JTextField txfPseudo;
     private JButton btnConnection;
-    private GridLayout gridLayout;
+    private GridBagLayout gridLayout;
 
     @Override
     public void setText(String text) {

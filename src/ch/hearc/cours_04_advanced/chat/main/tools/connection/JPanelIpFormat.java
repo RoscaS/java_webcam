@@ -41,7 +41,12 @@ public class JPanelIpFormat extends JPanel {
     }
 
     private void apparence() {
-
+        Dimension dimension = new Dimension();
+        dimension.setSize(200,30);
+        this.setMinimumSize(dimension);
+        /*
+        this.setPreferredSize(dimension);
+        this.setMaximumSize(dimension);*/
     }
 
     /*------------------------------------------------------------------*\

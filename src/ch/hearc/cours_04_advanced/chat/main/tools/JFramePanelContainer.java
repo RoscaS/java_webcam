@@ -49,7 +49,8 @@ public class JFramePanelContainer extends JFrame
 
 	private void appearance()
 		{
-		setSize(800, 800);
+		setMinimumSize(jComponent.getMinimumSize());
+		setSize(getMinimumSize());
 		setLocationRelativeTo(null); // frame centrer
 		setVisible(true); // last!
 		}
