@@ -50,7 +50,7 @@ public class JPanelChat extends JChat_A {
     \*------------------------------------------------------------------*/
     @Override
     public void setText(String text) {
-
+        jPanelChatWriter.addTextLabel(text);
     }
 
     @Override

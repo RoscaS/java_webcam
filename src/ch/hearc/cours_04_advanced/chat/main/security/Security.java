@@ -5,7 +5,9 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.security.*;
+import java.util.Arrays;
 
 public class Security implements Security_I {
 
@@ -32,9 +34,9 @@ public class Security implements Security_I {
         this.publicKey = pair.getPublic();
 
 
-        // Initialize simmetrical key;
+        // Initialize symmetrical key;
         try{
-            this.simKey = KeyGenerator.getInstance("DES").generateKey();
+            this.symKey = KeyGenerator.getInstance("DES").generateKey();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             System.err.println("Couldn't generate simetrical key.");
@@ -52,11 +54,14 @@ public class Security implements Security_I {
     public byte[] encrypt(byte[] byteArray) {
 
         // Encrypt byteArray and simmetrical key
-        byte[] byteArrayEncrypted = encryptWithKey(simKey, byteArray);
-        byte[] keyEncrypted = encryptWithKey(foreignKey, simKey.getEncoded());
+        byte[] byteArrayEncrypted = encryptWithKey(symKey, byteArray);
+        byte[] keyEncrypted = encryptWithKey(foreignKey, symKey.getEncoded());
+
+        symKeyEncryptedSize = keyEncrypted.length;
 
         // Concatenate both byteArray
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        // NOT WORKING
+        /*ByteArrayOutputStream stream = new ByteArrayOutputStream();
         try{
             stream.write(keyEncrypted);
             stream.write(byteArrayEncrypted);
@@ -67,25 +72,57 @@ public class Security implements Security_I {
             System.err.println("Error writing to buffer");
         }
 
+        System.out.println("Message sent length" + stream.toByteArray().length);
+
         return stream.toByteArray();
+        */
+
+        byte[] message = new byte[byteArrayEncrypted.length+keyEncrypted.length];
+        for(int i = 0; i < byteArrayEncrypted.length;i++)
+        {
+            message[i] = byteArrayEncrypted[i];
+        }
+
+        for(int i = 0; i < keyEncrypted.length;i++)
+        {
+            message[i + byteArrayEncrypted.length] = keyEncrypted[i];
+        }
+
+        System.out.println("Message sent length " + message.length);
+
+        return message;
     }
 
     @Override
     public byte[] decrypt(byte[] byteArray) {
 
         // Decrypt foreign key
-        int keyByteSize = publicKey.getEncoded().length;
+        if(symKeyEncryptedSize == 0)
+        {
+            symKeyEncryptedSize = encryptWithKey(foreignKey, symKey.getEncoded()).length;
+        }
+
+        System.out.println("Message received length " + byteArray.length);
+        int keyByteSize = symKeyEncryptedSize;
         byte[] encryptedKey = new byte[keyByteSize];
 
-        ByteArrayInputStream stream = new ByteArrayInputStream(byteArray);
-        stream.read(encryptedKey, byteArray.length - 1 - keyByteSize, keyByteSize);
+        int indexEncryptedKey = 0;
+        for(int i=byteArray.length-keyByteSize; i<byteArray.length;i++)
+        {
+            encryptedKey[indexEncryptedKey] = byteArray[i];
+            indexEncryptedKey++;
+        }
 
         byte[] foreignKeyDecrypted = decryptWithKey(privateKey, encryptedKey);
         SecretKey foreignSimKey = new SecretKeySpec(foreignKeyDecrypted, 0, foreignKeyDecrypted.length, "DES");
 
-        // Decrypt byte array with simmetrical key
-        byte[] encryptedByteArray = null;
-        stream.read(encryptedByteArray, 0, byteArray.length - 1 - keyByteSize);
+        // Decrypt byte array with symmetrical key
+        byte[] encryptedByteArray = new byte[byteArray.length - keyByteSize];
+
+        for(int i=0; i<byteArray.length - keyByteSize; i++)
+        {
+            encryptedByteArray[i] = byteArray[i];
+        };
 
         return decryptWithKey(foreignSimKey, encryptedByteArray);
     }
@@ -118,9 +155,14 @@ public class Security implements Security_I {
         Cipher cipherSym = null;
         byte[] encryptedByteArray = null;
 
+        if(key == null)
+        {
+            System.err.println("ERREUR, keyIsNull");
+        }
+
         try {
             cipherSym = Cipher.getInstance(key.getAlgorithm());
-            cipherSym.init(Cipher.ENCRYPT_MODE, simKey);
+            cipherSym.init(Cipher.ENCRYPT_MODE, key);
 
             encryptedByteArray = cipherSym.doFinal(byteArray);
         }
@@ -145,7 +187,7 @@ public class Security implements Security_I {
 
             try {
                 cipherAsym = Cipher.getInstance(key.getAlgorithm());
-                cipherAsym.init(Cipher.DECRYPT_MODE, simKey);
+                cipherAsym.init(Cipher.DECRYPT_MODE, key);
 
                 decryptedByteArray = cipherAsym.doFinal(encryptedByteArray);
             }
@@ -169,7 +211,8 @@ public class Security implements Security_I {
 
     PublicKey publicKey;
     PrivateKey privateKey;
-    SecretKey simKey;
+    SecretKey symKey;
+    int symKeyEncryptedSize = 0;
 
     PublicKey foreignKey;
 }

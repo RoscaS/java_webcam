@@ -52,7 +52,7 @@ public class JPanelChatWriter extends JPanel {
         jtfMessage.addActionListener(new AbstractAction() {
                             @Override
                             public void actionPerformed(ActionEvent actionEvent) {
-                                lblChat.setText(lblChat.getText() + "\n" + jtfMessage.getText());
+                                addTextLabel(jtfMessage.getText());
                                 Application.getInstance().sendText(jtfMessage.getText());
                                 jtfMessage.setText("");
                             }
@@ -89,6 +89,16 @@ public class JPanelChatWriter extends JPanel {
         jtfMessage.setPreferredSize(new Dimension(0, 40));
         jtfMessage.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jtfMessage.setBackground(new Color(164, 167, 174));
+    }
+
+
+    /*------------------------------------------------------------------*\
+    |*							Public Methods							*|
+    \*------------------------------------------------------------------*/
+
+    public void addTextLabel(String text)
+    {
+        lblChat.setText(lblChat.getText() + "\n" + text);
     }
 
         /*------------------------------------------------------------------*\

@@ -56,11 +56,6 @@ public class ChatRMI implements ChatRemote_I
 			{
 			Message message = new Message(text);
 
-			if(Message.getPublicKey() == null)
-			{
-				sendForeignKey();
-			}
-
 			chatRemote.setText(message);
 			}
 		catch (RemoteException e)
@@ -116,13 +111,7 @@ public class ChatRMI implements ChatRemote_I
 	@Override
 	public void initForeignKey(PublicKey foreignPublicKey) throws RemoteException
 	{
-		this.foreignPublicKey = foreignPublicKey;
 		Message.setForeignPublicKey(foreignPublicKey);
-
-		if(!publicKeySent)
-		{
-			sendForeignKey();
-		}
 	}
 
 	/*------------------------------------------------------------------*\
@@ -153,6 +142,7 @@ public class ChatRMI implements ChatRemote_I
 	private void clientSide()
 		{
 		chatRemote = connect();
+		sendPublicKey();
 		}
 
 	private ChatRemote_I connect()
@@ -171,7 +161,7 @@ public class ChatRMI implements ChatRemote_I
 			}
 		}
 
-	private void sendForeignKey() {
+	private void sendPublicKey() {
 		try{
 			chatRemote.initForeignKey(Message.getPublicKey());
 		}
@@ -190,11 +180,6 @@ public class ChatRMI implements ChatRemote_I
 
 	// Tools
 	private ChatRemote_I chatRemote;
-	private PublicKey foreignPublicKey;
-	private PublicKey publicKey;
-
-	private boolean publicKeySent = false;
-
 	/*------------------------------*\
 	|*			  Static			*|
 	\*------------------------------*/

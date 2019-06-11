@@ -83,7 +83,7 @@ public class Message implements Serializable
 
 	private static String decrypter(byte[] byteArray)
 		{
-		return SECURITY.decrypt(byteArray).toString();
+		return new String(SECURITY.decrypt(byteArray));
 		}
 
 	/*------------------------------------------------------------------*\
