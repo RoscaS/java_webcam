@@ -24,7 +24,7 @@ public class JPanelChatWriter extends JPanel {
     private void geometry() {
         message = "Envoyer un message dans le chat";
         jtfMessage = new JTextField(message);
-        lblChat = new JLabel();
+        lblChat = new JTextArea();
         btnDisconnect = new JButton("Se déconnecter");
 
         Box hBoxSender = Box.createHorizontalBox();
@@ -49,10 +49,12 @@ public class JPanelChatWriter extends JPanel {
     private void control() {
 
         jtfMessage.addActionListener(new AbstractAction() {
+
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                addTextLabel(jtfMessage.getText());
-                Application.getInstance().sendText(jtfMessage.getText());
+                String message = localPseudo + ": " + jtfMessage.getText();
+                addTextLabel(message);
+                Application.getInstance().sendText(message);
                 jtfMessage.setText("");
             }
         });
@@ -79,10 +81,6 @@ public class JPanelChatWriter extends JPanel {
 
     private void apparence() {
         this.setBackground(new Color(84, 87, 94));
-
-        lblChat.setHorizontalTextPosition(SwingConstants.LEFT);
-        lblChat.setVerticalTextPosition(SwingConstants.BOTTOM);
-
         jtfMessage.setFont(new Font("Arial", Font.PLAIN, 15));
         jtfMessage.setForeground(new Color(84, 87, 94));
         jtfMessage.setPreferredSize(new Dimension(0, 40));
@@ -99,6 +97,10 @@ public class JPanelChatWriter extends JPanel {
         lblChat.setText(lblChat.getText() + "\n" + text);
     }
 
+    public void setLocalPseudo(String localPseudo) {
+        this.localPseudo = localPseudo;
+    }
+
         /*------------------------------------------------------------------*\
        	|*							Private Methods							*|
        	\*------------------------------------------------------------------*/
@@ -110,8 +112,10 @@ public class JPanelChatWriter extends JPanel {
        	\*------------------------------------------------------------------*/
 
     private JTextField jtfMessage;
-    private JLabel lblChat;
+    private JTextArea lblChat;
     public JButton btnDisconnect;
+
+    private String localPseudo;
 
     private String message;
 }

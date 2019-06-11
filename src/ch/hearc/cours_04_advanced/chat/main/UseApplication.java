@@ -1,7 +1,10 @@
 
 package ch.hearc.cours_04_advanced.chat.main;
 
+import ch.hearc.cours_04_advanced.chat.main.tools.connection.JPanelConnection;
 import ch.hearc.cours_04_advanced.chat.rmi.ChatRMI;
+
+import javax.swing.*;
 
 public class UseApplication
 	{
@@ -17,7 +20,6 @@ public class UseApplication
 	public static void main()
 		{
 		Application.getInstance();
-		ChatRMI.getInstance();
 		}
 
 	/*------------------------------------------------------------------*\

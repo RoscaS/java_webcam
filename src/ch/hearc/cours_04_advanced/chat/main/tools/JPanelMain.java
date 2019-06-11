@@ -1,19 +1,16 @@
 package ch.hearc.cours_04_advanced.chat.main.tools;
 
-
-import ch.hearc.cours_04_advanced.chat.main.Application;
 import ch.hearc.cours_04_advanced.chat.main.JChat_A;
-import ch.hearc.cours_04_advanced.chat.main.tools.element.JPanelChatWriter;
-import ch.hearc.cours_04_advanced.chat.main.tools.element.JPanelWebcam;
+import ch.hearc.cours_04_advanced.chat.main.tools.connection.JPanelConnection;
+import ch.hearc.cours_04_advanced.chat.main.tools.element.JPanelChat;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
-public class JPanelChat extends JChat_A {
+public class JPanelMain extends JChat_A {
 
-    public JPanelChat() {
+    public JPanelMain() {
         geometry();
         control();
         apparence();
@@ -24,13 +21,20 @@ public class JPanelChat extends JChat_A {
    	\*------------------------------------------------------------------*/
 
     private void geometry() {
-        jPanelChatWriter = new JPanelChatWriter();
-        jPanelWebcam = new JPanelWebcam();
-        splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, jPanelWebcam, jPanelChatWriter);
-
+        jPanelConnection = new JPanelConnection();
+        jPanelChat = new JPanelChat();
         setLayout(new BorderLayout());
+        Box hBox = Box.createHorizontalBox();
+        Box vBox = Box.createVerticalBox();
 
-        add(splitPane, BorderLayout.CENTER);
+        hBox.add(Box.createHorizontalGlue());
+        hBox.add(jPanelConnection);
+        hBox.add(Box.createHorizontalGlue());
+
+        vBox.add(Box.createVerticalGlue());
+        vBox.add(hBox);
+        vBox.add(Box.createVerticalGlue());
+        add(vBox, BorderLayout.CENTER);
     }
 
     private void control() {
@@ -38,19 +42,27 @@ public class JPanelChat extends JChat_A {
     }
 
     private void apparence() {
-        splitPane.setDividerSize(3);
+        this.setBackground(new Color(84, 87, 94));
     }
 
     /*------------------------------------------------------------------*\
    	|*							Private Methods							*|
    	\*------------------------------------------------------------------*/
 
+
+
     /*------------------------------------------------------------------*\
-    |*							Public Methods							*|
-    \*------------------------------------------------------------------*/
+   	|*							Private Attributs 						*|
+   	\*------------------------------------------------------------------*/
+
+    JPanelConnection jPanelConnection;
+    JPanelChat jPanelChat;
+
+
+
     @Override
     public void setText(String text) {
-        jPanelChatWriter.addTextLabel(text);
+
     }
 
     @Override
@@ -77,14 +89,4 @@ public class JPanelChat extends JChat_A {
     public void showError(String error) {
 
     }
-
-    /*------------------------------------------------------------------*\
-   	|*							Private Attributs 						*|
-   	\*------------------------------------------------------------------*/
-
-    private JPanelWebcam jPanelWebcam;
-    private JPanelChatWriter jPanelChatWriter;
-    JSplitPane splitPane;
-
-
 }

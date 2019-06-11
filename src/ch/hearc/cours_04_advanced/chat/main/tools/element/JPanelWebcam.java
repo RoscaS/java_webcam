@@ -34,7 +34,6 @@ public class JPanelWebcam extends JPanel {
 
         try {
             setGrey(1.5f, 1f);
-
             webcamPanel = new WebcamPanel(webcam);
             add(webcamPanel, BorderLayout.CENTER);
 
