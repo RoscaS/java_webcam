@@ -26,9 +26,14 @@ public class JPanelChatWriter extends JPanel {
         jtfMessage = new JTextField(message);
         lblChat = new JTextArea();
         btnDisconnect = new JButton("Se déconnecter");
+        scrollPane = new JScrollPane(lblChat);
 
         Box hBoxSender = Box.createHorizontalBox();
         Box vBoxSender = Box.createVerticalBox();
+        Box hBoxChat = Box.createHorizontalBox();
+
+        hBoxChat.add(lblChat);
+        hBoxChat.add(scrollPane);
 
         hBoxSender.add(Box.createHorizontalStrut(20));
         hBoxSender.add(vBoxSender);
@@ -42,7 +47,7 @@ public class JPanelChatWriter extends JPanel {
         setLayout(new BorderLayout());
 
 
-        add(lblChat, BorderLayout.CENTER);
+        add(hBoxChat, BorderLayout.CENTER);
         add(hBoxSender, BorderLayout.SOUTH);
     }
 
@@ -51,10 +56,13 @@ public class JPanelChatWriter extends JPanel {
         jtfMessage.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                String message = localPseudo + ": " + jtfMessage.getText();
-                addTextLabel(message);
-                Application.getInstance().sendText(message);
-                jtfMessage.setText("");
+                if(!jtfMessage.getText().isEmpty()){
+                    String message = localPseudo + ": " + jtfMessage.getText();
+                    addTextLabel(message);
+                    Application.getInstance().sendText(message);
+                    jtfMessage.setText("");
+                }
+
             }
         });
 
@@ -86,6 +94,8 @@ public class JPanelChatWriter extends JPanel {
         jtfMessage.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         lblChat.setBackground(new Color(84, 87, 94));
         lblChat.setEditable(false);
+        scrollPane.setBounds(23, 40, 394, 191);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
 
 
@@ -114,6 +124,7 @@ public class JPanelChatWriter extends JPanel {
     private JTextField jtfMessage;
     private JTextArea lblChat;
     public JButton btnDisconnect;
+    private JScrollPane scrollPane;
 
     private String localPseudo;
 
