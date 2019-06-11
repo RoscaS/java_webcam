@@ -1,7 +1,9 @@
 package ch.hearc.cours_04_advanced.chat.main.tools.element;
 
+import ch.hearc.cours_04_advanced.chat.main.JChat_A;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +14,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.awt.image.RescaleOp;
 
-public class JPanelWebcam extends JPanel {
+public class JPanelWebcam extends JChat_A {
 
     public JPanelWebcam() {
         geometry();
@@ -27,49 +29,44 @@ public class JPanelWebcam extends JPanel {
     private void geometry() {
         setLayout(new BorderLayout());
         webcamComboBox = new JComboBox<>();
-        addWebcam();
+        addComboBoxWebcam();
 
-        webcam = Webcam.getDefault();
-
-
-        try {
-            setGrey(1.5f, 1f);
-            webcamPanel = new WebcamPanel(webcam);
-            add(webcamPanel, BorderLayout.CENTER);
-
-        } catch (Exception ignored) {
+        int idWebcam = getValideWebcamId();
+        if (idWebcam != -1) {
+            showWebcam(idWebcam);
         }
 
         add(webcamComboBox, BorderLayout.SOUTH);
     }
 
     private void control() {
-        //rien
+
         webcamComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Webcam.getWebcams().get(webcamComboBox.getSelectedIndex()).isOpen();//TODO use it
-                setWebcam(webcamComboBox.getSelectedIndex());
-                webcamPanel = new WebcamPanel(webcam);
-                add(webcamPanel, BorderLayout.CENTER);
+                if (webcam != webcamComboBox.getItemAt(webcamComboBox.getSelectedIndex())) {
+                    showWebcam(webcamComboBox.getSelectedIndex());
+                }
             }
         });
     }
 
     private void apparence() {
-        try {
-            webcamPanel.setFPSDisplayed(true);
-            // webcamPanel.setDisplayDebugInfo(true);
-            webcamPanel.setImageSizeDisplayed(true);
-            webcamPanel.setMirrored(true);
-        } catch (Exception ignored) {
+        if(webcam != null) {
+            setWebcamPanel();
         }
     }
-
 
     /*------------------------------------------------------------------*\
    	|*							Private Methods							*|
    	\*------------------------------------------------------------------*/
+
+    private void setWebcamPanel() {
+        webcamPanel.setFPSDisplayed(true);
+        webcamPanel.setImageSizeDisplayed(true);
+        webcamPanel.setMirrored(true);
+    }
+
 
     private void setGrey(float ScaleFactor, float Offset) {
         webcam.setImageTransformer((BufferedImage image) -> {
@@ -85,14 +82,40 @@ public class JPanelWebcam extends JPanel {
         });
     }
 
-    private void addWebcam() {
+    private void addComboBoxWebcam() {
         for (Webcam webcam : Webcam.getWebcams()) {
             webcamComboBox.addItem(webcam);
         }
     }
 
+    private int getValideWebcamId() {
+        int i = 0;
+        for (Webcam webcam : Webcam.getWebcams()) {
+            {
+                if (!webcam.isOpen()) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
     private void setWebcam(int i) {
-        webcam = Webcam.getWebcams().get(i);
+        if (!Webcam.getWebcams().get(i).isOpen()) {
+            webcam = Webcam.getWebcams().get(i);
+        } else {
+            JOptionPane.showOptionDialog(null, "La webcam n'est pas accessible !", "Webcam utilisé", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+        }
+
+    }
+
+    private void showWebcam(int idWebcam) {
+        setWebcam(idWebcam);
+        webcam.setViewSize(WebcamResolution.VGA.getSize());
+        setGrey(1.5f, 1f);
+        webcamPanel = new WebcamPanel(webcam);
+        setWebcamPanel();
+        add(webcamPanel, BorderLayout.CENTER);
     }
     /*------------------------------------------------------------------*\
    	|*							Private Attributs 						*|
@@ -102,4 +125,34 @@ public class JPanelWebcam extends JPanel {
     private JComboBox<Webcam> webcamComboBox;
     private Webcam webcam;
     private BufferedImage webcamOther;
+
+    @Override
+    public void setText(String text) {
+
+    }
+
+    @Override
+    public void setRemoteImage(BufferedImage bRemoteImage) {
+
+    }
+
+    @Override
+    public void setLocalImage(BufferedImage bLocalImage) {
+
+    }
+
+    @Override
+    public void setRemotePseudo(String remotePseudo) {
+
+    }
+
+    @Override
+    public void setLocalPseudo(String localPseudo) {
+
+    }
+
+    @Override
+    public void showError(String error) {
+
+    }
 }

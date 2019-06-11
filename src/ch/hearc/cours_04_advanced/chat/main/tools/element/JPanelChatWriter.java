@@ -49,7 +49,6 @@ public class JPanelChatWriter extends JPanel {
     private void control() {
 
         jtfMessage.addActionListener(new AbstractAction() {
-
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 String message = localPseudo + ": " + jtfMessage.getText();
@@ -85,7 +84,8 @@ public class JPanelChatWriter extends JPanel {
         jtfMessage.setForeground(new Color(84, 87, 94));
         jtfMessage.setPreferredSize(new Dimension(0, 40));
         jtfMessage.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jtfMessage.setBackground(new Color(164, 167, 174));
+        lblChat.setBackground(new Color(84, 87, 94));
+        lblChat.setEditable(false);
     }
 
 
