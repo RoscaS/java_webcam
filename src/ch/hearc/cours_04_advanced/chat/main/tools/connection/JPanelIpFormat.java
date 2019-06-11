@@ -58,7 +58,6 @@ public class JPanelIpFormat extends JPanel {
     }
 
     public void setIp(String ip){
-        System.out.println(ip);
         String[] tableIp = ip.split("\\.");
         for(int i = 0; i < tableIp.length; i++)
         {

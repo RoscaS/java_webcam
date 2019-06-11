@@ -97,7 +97,6 @@ public class JPanelWebcam extends JChat_A {
         int i = 0;
         for (Webcam webcam : Webcam.getWebcams()) {
             {
-                System.out.println(webcam.getLock().isLocked());
                 if (!webcam.getLock().isLocked()) {
                     webcamComboBox.setSelectedIndex(i);
                     return i;

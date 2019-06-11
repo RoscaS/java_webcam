@@ -32,8 +32,10 @@ public class JPanelChatWriter extends JPanel {
         Box vBoxSender = Box.createVerticalBox();
         Box hBoxChat = Box.createHorizontalBox();
 
+        hBoxChat.add(Box.createHorizontalStrut(20));
         hBoxChat.add(lblChat);
         hBoxChat.add(scrollPane);
+        hBoxChat.add(Box.createHorizontalStrut(20));
 
         hBoxSender.add(Box.createHorizontalStrut(20));
         hBoxSender.add(vBoxSender);
@@ -59,8 +61,8 @@ public class JPanelChatWriter extends JPanel {
                 if(!jtfMessage.getText().isEmpty()){
                     String message = localPseudo + ": " + jtfMessage.getText();
                     addTextLabel(message);
-                    Application.getInstance().sendText(message);
                     jtfMessage.setText("");
+                    Application.getInstance().sendText(message);
                 }
 
             }
