@@ -49,13 +49,13 @@ public class JPanelChatWriter extends JPanel {
     private void control() {
 
         jtfMessage.addActionListener(new AbstractAction() {
-                            @Override
-                            public void actionPerformed(ActionEvent actionEvent) {
-                                addTextLabel(jtfMessage.getText());
-                                Application.getInstance().sendText(jtfMessage.getText());
-                                jtfMessage.setText("");
-                            }
-                        });
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                addTextLabel(jtfMessage.getText());
+                Application.getInstance().sendText(jtfMessage.getText());
+                jtfMessage.setText("");
+            }
+        });
 
 
         jtfMessage.addFocusListener(new FocusAdapter() {
@@ -95,8 +95,7 @@ public class JPanelChatWriter extends JPanel {
     |*							Public Methods							*|
     \*------------------------------------------------------------------*/
 
-    public void addTextLabel(String text)
-    {
+    public void addTextLabel(String text) {
         lblChat.setText(lblChat.getText() + "\n" + text);
     }
 

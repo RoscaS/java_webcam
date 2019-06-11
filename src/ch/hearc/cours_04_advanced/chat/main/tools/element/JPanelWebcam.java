@@ -5,8 +5,12 @@ import com.github.sarxos.webcam.WebcamPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorConvertOp;
+import java.awt.image.RescaleOp;
 
 public class JPanelWebcam extends JPanel {
 
@@ -14,7 +18,6 @@ public class JPanelWebcam extends JPanel {
         geometry();
         control();
         apparence();
-
     }
 
     /*------------------------------------------------------------------*\
@@ -24,22 +27,21 @@ public class JPanelWebcam extends JPanel {
     private void geometry() {
         setLayout(new BorderLayout());
         webcamComboBox = new JComboBox<>();
+        addWebcam();
 
-        for (Webcam webcam : Webcam.getWebcams())
-            {
-                webcamComboBox.addItem(webcam);
-            }
+        webcam = Webcam.getDefault();
 
-        try{
-        webcam = new CustomWebcam();
-        webcam.setGrey(1.5f, 1f);
 
-        webcamPanel = new WebcamPanel(webcam.getWebcam());
-        add(webcamPanel, BorderLayout.CENTER);
+        try {
+            setGrey(1.5f, 1f);
 
-        } catch (Exception ignored) {}
+            webcamPanel = new WebcamPanel(webcam);
+            add(webcamPanel, BorderLayout.CENTER);
 
-        add(webcamComboBox, BorderLayout.NORTH);
+        } catch (Exception ignored) {
+        }
+
+        add(webcamComboBox, BorderLayout.SOUTH);
     }
 
     private void control() {
@@ -48,8 +50,8 @@ public class JPanelWebcam extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Webcam.getWebcams().get(webcamComboBox.getSelectedIndex()).isOpen();//TODO use it
-                webcam.setWebcam(webcamComboBox.getSelectedIndex());
-                webcamPanel = new WebcamPanel(webcam.getWebcam());
+                setWebcam(webcamComboBox.getSelectedIndex());
+                webcamPanel = new WebcamPanel(webcam);
                 add(webcamPanel, BorderLayout.CENTER);
             }
         });
@@ -61,20 +63,44 @@ public class JPanelWebcam extends JPanel {
             // webcamPanel.setDisplayDebugInfo(true);
             webcamPanel.setImageSizeDisplayed(true);
             webcamPanel.setMirrored(true);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
+
 
     /*------------------------------------------------------------------*\
    	|*							Private Methods							*|
    	\*------------------------------------------------------------------*/
 
+    private void setGrey(float ScaleFactor, float Offset) {
+        webcam.setImageTransformer((BufferedImage image) -> {
+            BufferedImage modified;
+            ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
+            RescaleOp ro = new RescaleOp(ScaleFactor, Offset, null);
+            ColorConvertOp op = new ColorConvertOp(cs, null);
 
+            modified = ro.filter(image, null);
+            op.filter(modified, modified);
 
+            return modified;
+        });
+    }
+
+    private void addWebcam() {
+        for (Webcam webcam : Webcam.getWebcams()) {
+            webcamComboBox.addItem(webcam);
+        }
+    }
+
+    private void setWebcam(int i) {
+        webcam = Webcam.getWebcams().get(i);
+    }
     /*------------------------------------------------------------------*\
    	|*							Private Attributs 						*|
    	\*------------------------------------------------------------------*/
 
     private WebcamPanel webcamPanel;
     private JComboBox<Webcam> webcamComboBox;
-    private CustomWebcam webcam;
+    private Webcam webcam;
+    private BufferedImage webcamOther;
 }

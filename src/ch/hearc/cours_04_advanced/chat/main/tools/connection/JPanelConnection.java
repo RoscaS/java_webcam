@@ -87,7 +87,7 @@ public class JPanelConnection extends JPanel {
     }
 
     private boolean valideValue(){
-        return !txfPseudo.getText().isEmpty() && txfIp.isValide();
+        return (!txfPseudo.getText().isEmpty() && txfIp.isValide());
     }
 
     /*------------------------------------------------------------------*\
