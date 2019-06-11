@@ -32,6 +32,7 @@ public class JPanelWebcam extends JChat_A {
         addComboBoxWebcam();
 
         int idWebcam = getValideWebcamId();
+        System.out.println(idWebcam);
         if (idWebcam != -1) {
             showWebcam(idWebcam);
         }
@@ -52,9 +53,6 @@ public class JPanelWebcam extends JChat_A {
     }
 
     private void apparence() {
-        if(webcam != null) {
-            setWebcamPanel();
-        }
     }
 
     /*------------------------------------------------------------------*\
@@ -92,7 +90,7 @@ public class JPanelWebcam extends JChat_A {
         int i = 0;
         for (Webcam webcam : Webcam.getWebcams()) {
             {
-                if (!webcam.isOpen()) {
+                if (!webcam.getLock().isLocked()) {
                     return i;
                 }
             }
@@ -101,7 +99,7 @@ public class JPanelWebcam extends JChat_A {
     }
 
     private void setWebcam(int i) {
-        if (!Webcam.getWebcams().get(i).isOpen()) {
+        if (!Webcam.getWebcams().get(i).getLock().isLocked()) {
             webcam = Webcam.getWebcams().get(i);
         } else {
             JOptionPane.showOptionDialog(null, "La webcam n'est pas accessible !", "Webcam utilisé", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
@@ -112,7 +110,7 @@ public class JPanelWebcam extends JChat_A {
     private void showWebcam(int idWebcam) {
         setWebcam(idWebcam);
         webcam.setViewSize(WebcamResolution.VGA.getSize());
-        setGrey(1.5f, 1f);
+        setGrey(1.5f, 0.8f);
         webcamPanel = new WebcamPanel(webcam);
         setWebcamPanel();
         add(webcamPanel, BorderLayout.CENTER);
