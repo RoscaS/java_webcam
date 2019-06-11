@@ -3,10 +3,10 @@ package ch.hearc.cours_04_advanced.chat.main.tools;
 import ch.hearc.cours_04_advanced.chat.main.JChat_A;
 import ch.hearc.cours_04_advanced.chat.main.tools.connection.JPanelConnection;
 import ch.hearc.cours_04_advanced.chat.main.tools.element.JPanelChat;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 public class JPanelMain extends JChat_A {
@@ -26,7 +26,7 @@ public class JPanelMain extends JChat_A {
         jPanelChat = new JPanelChat();
         setLayout(new BorderLayout());
         Box hBox = Box.createHorizontalBox();
-        Box vBox = Box.createVerticalBox();
+        vBox = Box.createVerticalBox();
 
         hBox.add(Box.createHorizontalGlue());
         hBox.add(jPanelConnection);
@@ -39,12 +39,22 @@ public class JPanelMain extends JChat_A {
     }
 
     private void control() {
+        jPanelConnection.getBtnConnection().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                remove(vBox);
+                add(jPanelChat);
+                setPreferredSize(new Dimension(1000,800));
+                revalidate();
+                repaint();
 
+            }
+        });
     }
 
     private void apparence() {
-        this.setBackground(new Color(84, 87, 94));
-        this.setMinimumSize(new Dimension(jPanelConnection.getMinimumSize()));
+        setBackground(new Color(84, 87, 94));
+        setMinimumSize(new Dimension(jPanelConnection.getMinimumSize()));
     }
 
     /*------------------------------------------------------------------*\
@@ -57,8 +67,9 @@ public class JPanelMain extends JChat_A {
    	|*							Private Attributs 						*|
    	\*------------------------------------------------------------------*/
 
-    JPanelConnection jPanelConnection;
-    JPanelChat jPanelChat;
+    private JPanelConnection jPanelConnection;
+    private JPanelChat jPanelChat;
+    private Box vBox;
 
 
 
