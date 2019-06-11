@@ -47,6 +47,7 @@ public class JPanelWebcam extends JPanel {
         webcamComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Webcam.getWebcams().get(webcamComboBox.getSelectedIndex()).isOpen();//TODO use it
                 webcam.setWebcam(webcamComboBox.getSelectedIndex());
                 webcamPanel = new WebcamPanel(webcam.getWebcam());
                 add(webcamPanel, BorderLayout.CENTER);

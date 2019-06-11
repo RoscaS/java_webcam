@@ -79,11 +79,15 @@ public class JPanelConnection extends JPanel {
     }
 
     private void warn() {
-        if (!txfPseudo.getText().isEmpty() && txfIp.isValide()) {
+        if (valideValue()) {
             btnConnection.setEnabled(true);
         } else {
             btnConnection.setEnabled(false);
         }
+    }
+
+    private boolean valideValue(){
+        return !txfPseudo.getText().isEmpty() && txfIp.isValide();
     }
 
     /*------------------------------------------------------------------*\
