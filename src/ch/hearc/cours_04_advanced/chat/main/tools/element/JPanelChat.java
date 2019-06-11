@@ -27,7 +27,6 @@ public class JPanelChat extends JChat_A {
         jPanelChatWriter = new JPanelChatWriter();
         jPanelWebcam = new JPanelWebcam();
         splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, jPanelWebcam, jPanelChatWriter);
-
         setLayout(new BorderLayout());
 
         add(splitPane, BorderLayout.CENTER);
@@ -39,6 +38,7 @@ public class JPanelChat extends JChat_A {
 
     private void apparence() {
         splitPane.setDividerSize(3);
+        splitPane.getTopComponent().setSize(200,500);
     }
 
     /*------------------------------------------------------------------*\

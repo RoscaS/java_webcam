@@ -44,10 +44,8 @@ public class JPanelMain extends JChat_A {
             public void actionPerformed(ActionEvent actionEvent) {
                 remove(vBox);
                 add(jPanelChat);
-                setPreferredSize(new Dimension(1000,800));
                 revalidate();
                 repaint();
-
             }
         });
     }

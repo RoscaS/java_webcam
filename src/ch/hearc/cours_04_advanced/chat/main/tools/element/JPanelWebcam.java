@@ -40,7 +40,6 @@ public class JPanelWebcam extends JChat_A {
     }
 
     private void control() {
-
         webcamComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -108,7 +107,6 @@ public class JPanelWebcam extends JChat_A {
         } else {
             JOptionPane.showOptionDialog(null, "La webcam n'est pas accessible !", "Webcam utilisé", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
         }
-
     }
 
     private void showWebcam(int idWebcam) {
