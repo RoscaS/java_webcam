@@ -55,7 +55,7 @@ public class JPanelChat extends JChat_A {
 
     @Override
     public void setRemoteImage(BufferedImage bRemoteImage) {
-
+        jPanelWebcam.setRemoteImage(bRemoteImage);
     }
 
     @Override
@@ -77,6 +77,11 @@ public class JPanelChat extends JChat_A {
     @Override
     public void showError(String error) {
 
+    }
+
+    @Override
+    public void startVideo() {
+        jPanelWebcam.startVideo();
     }
 
     /*------------------------------------------------------------------*\

@@ -1,11 +1,15 @@
 package ch.hearc.cours_04_advanced.chat.main.tools.element;
 
+import ch.hearc.cours_04_advanced.chat.main.Application;
 import ch.hearc.cours_04_advanced.chat.main.JChat_A;
+import ch.hearc.cours_04_advanced.chat.main.video.WebcamException;
+import ch.hearc.cours_04_advanced.chat.main.video.WebcamService;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
@@ -13,6 +17,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.awt.image.RescaleOp;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class JPanelWebcam extends JChat_A {
 
@@ -36,6 +42,9 @@ public class JPanelWebcam extends JChat_A {
             showWebcam(idWebcam);
         }
 
+        img = new ImagePanel();
+
+        add(img, BorderLayout.NORTH);
         add(webcamComboBox, BorderLayout.SOUTH);
     }
 
@@ -125,6 +134,8 @@ public class JPanelWebcam extends JChat_A {
     private Webcam webcam;
     private BufferedImage webcamOther;
 
+    private ImagePanel img;
+
     @Override
     public void setText(String text) {
 
@@ -132,7 +143,7 @@ public class JPanelWebcam extends JChat_A {
 
     @Override
     public void setRemoteImage(BufferedImage bRemoteImage) {
-
+        img.setImage(bRemoteImage);
     }
 
     @Override
@@ -153,5 +164,22 @@ public class JPanelWebcam extends JChat_A {
     @Override
     public void showError(String error) {
 
+    }
+
+    @Override
+    public void startVideo()
+    {
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask()
+            {
+
+            @Override
+            public void run()
+                {
+                Application.getInstance().sendImage(webcam.getImage());
+            };
+        };
+
+        timer.schedule(timerTask, 0, 75);
     }
 }

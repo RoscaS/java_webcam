@@ -197,4 +197,9 @@ public class JPanelConnection extends JChat_A {
     public void showError(String error) {
 
     }
+
+    @Override
+    public void startVideo() {
+
+    }
 }

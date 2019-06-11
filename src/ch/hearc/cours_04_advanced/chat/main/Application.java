@@ -43,6 +43,7 @@ public class Application implements JChat_I, Runnable {
 	@Override
 	public void run() {
 		 ChatRMI.getInstance();
+		 jChat.startVideo();
 	}
 
     public void connect() {
@@ -98,6 +99,11 @@ public class Application implements JChat_I, Runnable {
     public void showError(String error) {
         this.jChat.showError(error);
     }
+
+	@Override
+	public void startVideo() {
+
+	}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|

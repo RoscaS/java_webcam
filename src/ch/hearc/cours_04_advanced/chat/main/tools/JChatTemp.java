@@ -73,6 +73,11 @@ public class JChatTemp extends JChat_A
 		labelError.setText(error);
 		}
 
+		@Override
+		public void startVideo() {
+
+		}
+
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
