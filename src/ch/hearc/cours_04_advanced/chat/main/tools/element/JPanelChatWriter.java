@@ -34,8 +34,8 @@ public class JPanelChatWriter extends JPanel {
 
         hBoxChat.add(Box.createHorizontalStrut(20));
         hBoxChat.add(lblChat);
-        hBoxChat.add(scrollPane);
         hBoxChat.add(Box.createHorizontalStrut(20));
+        hBoxChat.add(scrollPane);
 
         hBoxSender.add(Box.createHorizontalStrut(20));
         hBoxSender.add(vBoxSender);
@@ -96,8 +96,10 @@ public class JPanelChatWriter extends JPanel {
         jtfMessage.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         lblChat.setBackground(new Color(84, 87, 94));
         lblChat.setEditable(false);
+        lblChat.setFont(new Font("Arial", Font.PLAIN, 15));
+        lblChat.setForeground(new Color(184, 187, 194));
         scrollPane.setBounds(23, 40, 394, 191);
-        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
     }
 
 

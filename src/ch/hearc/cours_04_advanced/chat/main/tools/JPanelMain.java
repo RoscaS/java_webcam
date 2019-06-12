@@ -52,7 +52,7 @@ public class JPanelMain extends JChat_A {
 
     private void apparence() {
         setBackground(new Color(84, 87, 94));
-        setMinimumSize(new Dimension(800, 700));
+        setMinimumSize(new Dimension(1500, 900));
     }
 
     /*------------------------------------------------------------------*\

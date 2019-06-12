@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class JPanelConnection extends JChat_A {
+public class JPanelConnection extends JPanel {
 
     public JPanelConnection() {
         geometry();
@@ -71,6 +71,10 @@ public class JPanelConnection extends JChat_A {
 
     private void control() {
         txfPseudo.getDocument().addDocumentListener(getDocumentListener());
+        for (JTextField ip : txfIp.textFieldsIp)
+            {
+                ip.getDocument().addDocumentListener(getDocumentListener());
+            }
 
         btnConnection.addActionListener(new ActionListener() {
             @Override
@@ -118,7 +122,6 @@ public class JPanelConnection extends JChat_A {
         lblIpClient.setForeground(colorFont);
         lblPseudo.setForeground(colorFont);
 
-        txfIp.setIp("127.0.0.1");
     }
 
     /*------------------------------------------------------------------*\
@@ -167,39 +170,4 @@ public class JPanelConnection extends JChat_A {
     private JTextField txfPseudo;
     private JButton btnConnection;
     private GridBagLayout gridLayout;
-
-    @Override
-    public void setText(String text) {
-
-    }
-
-    @Override
-    public void setRemoteImage(BufferedImage bRemoteImage) {
-
-    }
-
-    @Override
-    public void setLocalImage(BufferedImage bLocalImage) {
-
-    }
-
-    @Override
-    public void setRemotePseudo(String remotePseudo) {
-
-    }
-
-    @Override
-    public void setLocalPseudo(String localPseudo) {
-
-    }
-
-    @Override
-    public void showError(String error) {
-
-    }
-
-    @Override
-    public void startVideo() {
-
-    }
 }

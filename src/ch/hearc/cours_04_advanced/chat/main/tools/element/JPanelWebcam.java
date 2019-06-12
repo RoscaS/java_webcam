@@ -35,6 +35,10 @@ public class JPanelWebcam extends JChat_A {
     private void geometry() {
         setLayout(new BorderLayout());
         webcamComboBox = new JComboBox<>();
+        img = new ImagePanel();
+        Box hBoxWebcam = Box.createHorizontalBox();
+        Box vBoxWebcam = Box.createVerticalBox();
+
         addComboBoxWebcam();
 
         int idWebcam = getValideWebcamId();
@@ -42,9 +46,14 @@ public class JPanelWebcam extends JChat_A {
             showWebcam(idWebcam);
         }
 
-        img = new ImagePanel();
+        hBoxWebcam.add(Box.createHorizontalGlue());
+        hBoxWebcam.add(vBoxWebcam);
+        hBoxWebcam.add(Box.createHorizontalGlue());
+        vBoxWebcam.add(Box.createVerticalGlue());
+        vBoxWebcam.add(img);
+        vBoxWebcam.add(Box.createVerticalGlue());
 
-        add(img, BorderLayout.WEST);
+        add(vBoxWebcam, BorderLayout.WEST);
         add(webcamComboBox, BorderLayout.SOUTH);
     }
 
@@ -166,17 +175,16 @@ public class JPanelWebcam extends JChat_A {
     }
 
     @Override
-    public void startVideo()
-    {
+    public void startVideo() {
         Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask()
-            {
+        TimerTask timerTask = new TimerTask() {
 
             @Override
-            public void run()
-                {
+            public void run() {
                 Application.getInstance().sendImage(webcam.getImage());
-            };
+            }
+
+            ;
         };
 
         timer.schedule(timerTask, 0, 75);

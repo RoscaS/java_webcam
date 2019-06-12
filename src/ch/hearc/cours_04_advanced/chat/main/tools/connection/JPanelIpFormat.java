@@ -124,6 +124,6 @@ public class JPanelIpFormat extends JPanel {
    	|*							Private Attributs 						*|
    	\*------------------------------------------------------------------*/
 
-    private ArrayList<JTextField> textFieldsIp;
+    public ArrayList<JTextField> textFieldsIp;
 
 }

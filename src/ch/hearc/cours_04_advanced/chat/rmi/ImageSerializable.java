@@ -8,17 +8,15 @@ import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 
-public class ImageSerializable implements Serializable
-	{
+public class ImageSerializable implements Serializable {
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public ImageSerializable(BufferedImage image)
-		{
-		this.bImage = image;
-		}
+    public ImageSerializable(BufferedImage image) {
+        this.bImage = image;
+    }
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
@@ -28,50 +26,44 @@ public class ImageSerializable implements Serializable
 	|*				Get				*|
 	\*------------------------------*/
 
-	public BufferedImage getImage()
-		{
-		return this.bImage;
-		}
+    public BufferedImage getImage() {
+        return this.bImage;
+    }
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
-	/**
-	* Customisation serialisation
-	*/
-	private void writeObject(ObjectOutputStream oos)
-		{
-		try
-			{
-			ImageIO.write(this.bImage, "jpeg", oos);
-			}
-		catch (IOException e)
-			{
-			e.printStackTrace();
-			}
-		}
+    /**
+     * Customisation serialisation
+     */
+    private void writeObject(ObjectOutputStream oos) {
+        try {
+            if (this.bImage != null) {
+                ImageIO.write(this.bImage, "jpeg", oos);
+            }
 
-	/**
-	* Customisation deserialisation
-	*/
-	private void readObject(ObjectInputStream ois)
-		{
-		try
-			{
-			this.bImage = ImageIO.read(ois);
-			}
-		catch (IOException e)
-			{
-			e.printStackTrace();
-			}
-		}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Customisation deserialisation
+     */
+    private void readObject(ObjectInputStream ois) {
+        try {
+                this.bImage = ImageIO.read(ois);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
-	// transient -> l'attribut ne sera pas serialise
-	// Rappel: BufferedImage n'est pas serialisable
-	private transient BufferedImage bImage;
-	}
+    // transient -> l'attribut ne sera pas serialise
+    // Rappel: BufferedImage n'est pas serialisable
+    private transient BufferedImage bImage;
+}
